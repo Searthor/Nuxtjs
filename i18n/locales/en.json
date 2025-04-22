@@ -1,5 +1,14 @@
 {
   "settings": "Settings",
   "roles": "Roles",
-  "users": "Users"
+  "name_role": "Role Name",
+  "add": "Add New",
+  "create": "Create",
+  "update": "Update",
+  "cancel": "Cancel",
+  "delete": "Delete",
+  "des": "Description",
+  "permissions": "Permissions",
+  "actions": "Actions"
+
 }

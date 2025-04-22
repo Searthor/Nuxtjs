@@ -7,7 +7,7 @@
           class="img-fluid" alt="Phone image">
       </div>
       <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-        <form class="bg-danger">
+        <form >
           <!-- Email input -->
           <div data-mdb-input-init class="form-outline mb-4">
             <input type="email" id="form1Example13" class="form-control form-control-lg" />
