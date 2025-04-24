@@ -109,6 +109,16 @@
 definePageMeta({
     middleware: 'auth'
 })
+let token = '';
+if (process.client) {
+  token = localStorage.getItem('token');
+}
+const { data: dataList, refresh } = await useFetch('/api/users', {
+  server: false,
+  headers: {
+    Authorization: `Bearer ${token}`
+  }
+});
 </script>
 
 

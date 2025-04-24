@@ -22,8 +22,8 @@
         id="password"
         v-model="password"
       />
-      <button type="submit">Log in</button>
-      <p class="text-danger">{{ error }}</p>
+      <button type="submit">{{ $t('login') }}</button>
+      <p class="text-warning mt-4 text-center">{{ error }}</p>
       <!-- <div class="social">
         <div class="go"><i class="fab fa-google"></i> Google</div>
         <div class="fb"><i class="fab fa-facebook"></i> Facebook</div>
@@ -39,26 +39,33 @@ definePageMeta({
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useFetch } from "#app";
+import axios from "axios";
 const email = ref("");
 const password = ref("");
 const error = ref("");
 const router = useRouter();
 const handleLogin = async () => {
-  const { data, error: fetchError } = await useFetch("/api/login", {
-    method: "POST",
-    body: { email: email.value, password: password.value },
-  });
-  if (fetchError.value) {
-    error.value = fetchError.value.data?.statusMessage || "Login failed";
-  } else {
-    localStorage.setItem("role_id", data.value.data?.role_id);
-    localStorage.setItem("token", data.value.token);
+  try {
+    const response = await axios.post("/api/login", {
+      email: email.value,
+      password: password.value,
+    });
+    const data = response.data;
+    localStorage.setItem("role_id", data.data?.role_id);
+    localStorage.setItem("token", data.token);
     router.push("/dashboard");
+  } catch (err) {
+    error.value = "ເບີໂທ ຫຼື ລະຫັດຜ່ານ ບໍ່ຖືກຕ້ອງ!";
   }
 };
 </script>
-
 <style scoped>
+@font-face {
+  font-family: 'Noto Sans Lao';
+  src: url('/fonts/NotoSansLao-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 *,
 *:before,
 *:after {
@@ -117,7 +124,7 @@ form {
 }
 
 form * {
-  font-family: "Poppins", sans-serif;
+  font-family: "Noto Sans Lao", sans-serif;
   color: #ffffff;
   letter-spacing: 0.5px;
   outline: none;

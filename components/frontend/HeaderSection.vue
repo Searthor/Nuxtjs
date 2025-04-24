@@ -34,7 +34,9 @@
               </li>
             </ul>
           </li>
-          <a class="btn-login" href="https://erpyoumart.com/login">{{ $t('login') }}</a>
+          <NuxtLink class="btn-login" to="/login" @click="isProductDropdownOpen = false">
+                  {{ $t('login') }}
+          </NuxtLink>
 
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>

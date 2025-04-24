@@ -191,7 +191,16 @@ const form = ref({
     des: ''
 })
 const toast = ref(null)
-const { data: roles, refresh } = await useFetch('/api/roles');
+let token = '';
+if (process.client) {
+  token = localStorage.getItem('token');
+}
+const { data: roles, refresh } = await useFetch('/api/roles', {
+  server: false,
+  headers: {
+    Authorization: `Bearer ${token}`
+  }
+});
 const getfunction_models = async () => {
     const response = await axios.get("/api/roles/function_models");
     function_models.value = response.data.function;

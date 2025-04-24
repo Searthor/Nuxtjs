@@ -15,13 +15,13 @@
               {{ $t("settings") }}
             </a>
             <ul class="dropdown-menu" :class="{ show: isProductDropdownOpen }">
-              <li>
+              <li v-if="$checkPermission('access_role')">
                 <NuxtLink class="dropdown-item" to="/settings/roles" @click="isProductDropdownOpen = false">
                   <i class="bi bi-lock"></i>
                   {{ $t("roles") }}
                 </NuxtLink>
               </li>
-              <li>
+              <li v-if="$checkPermission('access_user')">
                 <NuxtLink class="dropdown-item" to="/settings/users" @click="isProductDropdownOpen = false">
                   <i class="bi bi-person"></i>
                   {{ $t("users") }}
@@ -80,7 +80,7 @@
           <button type="button" class="btn btn-danger" @click="closeModal">
             <i class="fa fa-times"></i> ຍົກເລີກ
           </button>
-          <button type="button" class="btn btn-primary" @click="logout">
+          <button type="button" class="btn btn-primary" @click="handleLogout">
             <i class="fa-solid fa-right-to-bracket"></i>
             ຕົກລົງ
           </button>
@@ -96,6 +96,12 @@
 
 <script setup>
 import 'flag-icons/css/flag-icons.min.css';
+import { useRouter } from "vue-router";
+const router = useRouter();
+function handleLogout() {
+  localStorage.removeItem("token");
+  router.push("/login");
+}
 const showModal = ref(false);
 const isMenuOpen = ref(false);
 const windowWidth = ref(process.client ? window.innerWidth : 0); // Initialize safely
