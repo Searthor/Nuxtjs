@@ -44,9 +44,9 @@
 
 
 <script setup>
-// definePageMeta({
-//     middleware: 'auth'
-// })
+definePageMeta({
+    middleware: 'auth'
+})
 
 const revenueData = ref({
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],

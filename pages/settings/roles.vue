@@ -172,6 +172,9 @@
 </template>
 
 <script setup>
+definePageMeta({
+    middleware: 'auth'
+})
 import axios from 'axios';
 const { $swal } = useNuxtApp()
 const isModalOpen = ref(false)

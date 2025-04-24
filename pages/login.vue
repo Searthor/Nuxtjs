@@ -4,17 +4,26 @@
       <div class="shape"></div>
       <div class="shape"></div>
     </div>
-    <form>
-      <h3>{{ $t('login') }}</h3>
+    <form @submit.prevent="handleLogin">
+      <h3>{{ $t("login") }}</h3>
 
       <label for="username">Username</label>
-      <input type="text" placeholder="Email or Phone" id="username">
+      <input
+        type="text"
+        placeholder="Email or Phone"
+        id="username"
+        v-model="email"
+      />
 
       <label for="password">Password</label>
-      <input type="password" placeholder="Password" id="password">
-      <button>
-        Log in
-      </button>
+      <input
+        type="password"
+        placeholder="Password"
+        id="password"
+        v-model="password"
+      />
+      <button type="submit">Log in</button>
+      <p class="text-danger">{{ error }}</p>
       <!-- <div class="social">
         <div class="go"><i class="fab fa-google"></i> Google</div>
         <div class="fb"><i class="fab fa-facebook"></i> Facebook</div>
@@ -25,8 +34,28 @@
 
 <script setup>
 definePageMeta({
-  layout: false
-})
+  layout: false,
+});
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import { useFetch } from "#app";
+const email = ref("");
+const password = ref("");
+const error = ref("");
+const router = useRouter();
+const handleLogin = async () => {
+  const { data, error: fetchError } = await useFetch("/api/login", {
+    method: "POST",
+    body: { email: email.value, password: password.value },
+  });
+  if (fetchError.value) {
+    error.value = fetchError.value.data?.statusMessage || "Login failed";
+  } else {
+    localStorage.setItem("role_id", data.value.data?.role_id);
+    localStorage.setItem("token", data.value.token);
+    router.push("/dashboard");
+  }
+};
 </script>
 
 <style scoped>
@@ -61,16 +90,13 @@ definePageMeta({
 }
 
 .shape:first-child {
-  background: linear-gradient(#1845ad,
-      #23a2f6);
+  background: linear-gradient(#1845ad, #23a2f6);
   left: -80px;
   top: -80px;
 }
 
 .shape:last-child {
-  background: linear-gradient(to right,
-      #ff512f,
-      #f09819);
+  background: linear-gradient(to right, #ff512f, #f09819);
   right: -30px;
   bottom: -80px;
 }
@@ -91,7 +117,7 @@ form {
 }
 
 form * {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   color: #ffffff;
   letter-spacing: 0.5px;
   outline: none;
@@ -167,18 +193,14 @@ button {
   margin-right: 4px;
 }
 
-@media (max-width:700px) {
+@media (max-width: 700px) {
   form {
     height: auto;
     width: 300px;
-
   }
 
   .background {
     width: 300px;
-
   }
-
-
 }
 </style>
