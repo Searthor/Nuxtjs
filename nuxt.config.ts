@@ -1,8 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2024-11-01',
+  compatibilityDate: "2024-11-01",
   devtools: { enabled: true },
-  modules: ["@nuxtjs/i18n",'@pinia/nuxt'],
+  modules: ["@nuxtjs/i18n", "@pinia/nuxt"],
   i18n: {
     locales: [
       { code: "en", iso: "en-US", name: "English", file: "en.json" },
@@ -14,10 +14,16 @@ export default defineNuxtConfig({
     langDir: "locales",
   },
   css: [
-    'bootstrap/dist/css/bootstrap.min.css',
-    'bootstrap-icons/font/bootstrap-icons.css'
+    "bootstrap/dist/css/bootstrap.min.css",
+    "bootstrap-icons/font/bootstrap-icons.css",
+    "~/assets/css/main.css",
+   
   ],
   plugins: [
-    { src: '~/plugins/bootstrap.client.js', mode: 'client' }
-  ]
-})
+    { src: "~/plugins/bootstrap.client.js", mode: "client" },
+    { src: "~/plugins/custom.client.js", mode: "client" },
+    '~/plugins/glightbox.client.js'
+  ],
+
+  
+});

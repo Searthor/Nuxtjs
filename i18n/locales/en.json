@@ -9,6 +9,15 @@
   "delete": "Delete",
   "des": "Description",
   "permissions": "Permissions",
-  "actions": "Actions"
-
+  "actions": "Actions",
+  "home": "Home",
+  "about": "About",
+  "features": "Features",
+  "gallery": "Gallery",
+  "team": "Team",
+  "pricing": "Pricing",
+  "contact": "Contact",
+  "login": "Login",
+  "english": "English",
+  "lao": "Lao"
 }
