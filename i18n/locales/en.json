@@ -1,5 +1,23 @@
 {
   "settings": "Settings",
   "roles": "Roles",
-  "users": "Users"
+  "name_role": "Role Name",
+  "add": "Add New",
+  "create": "Create",
+  "update": "Update",
+  "cancel": "Cancel",
+  "delete": "Delete",
+  "des": "Description",
+  "permissions": "Permissions",
+  "actions": "Actions",
+  "home": "Home",
+  "about": "About",
+  "features": "Features",
+  "gallery": "Gallery",
+  "team": "Team",
+  "pricing": "Pricing",
+  "contact": "Contact",
+  "login": "Login",
+  "english": "English",
+  "lao": "Lao"
 }
