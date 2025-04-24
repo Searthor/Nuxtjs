@@ -17,12 +17,14 @@ export default defineNuxtConfig({
     "bootstrap/dist/css/bootstrap.min.css",
     "bootstrap-icons/font/bootstrap-icons.css",
     "~/assets/css/main.css",
-   
+    'sweetalert2/dist/sweetalert2.min.css'
+  
   ],
   plugins: [
     { src: "~/plugins/bootstrap.client.js", mode: "client" },
     { src: "~/plugins/custom.client.js", mode: "client" },
-    '~/plugins/glightbox.client.js'
+    '~/plugins/glightbox.client.js',
+    '~/plugins/swal.js'
   ],
 
   

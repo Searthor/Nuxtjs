@@ -1,14 +1,11 @@
 <template>
     <section id="details" class="details section">
-
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
             <h2>Details</h2>
             <div><span>Check Our</span> <span class="description-title">Details</span></div>
         </div><!-- End Section Title -->
-
         <div class="container">
-
             <div class="row gy-4 align-items-center features-item">
                 <div class="col-md-5 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="100">
                     <img src="assets/img/details-1.png" class="img-fluid" alt="">
@@ -30,7 +27,6 @@
                     </ul>
                 </div>
             </div><!-- Features Item -->
-
             <div class="row gy-4 align-items-center features-item">
                 <div class="col-md-5 order-1 order-md-2 d-flex align-items-center" data-aos="zoom-out"
                     data-aos-delay="200">
@@ -47,7 +43,7 @@
                         Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
                         reprehenderit in voluptate
                         velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                        proident, sunt in
+                     proident, sunt in
                         culpa qui officia deserunt mollit anim id est laborum
                     </p>
                 </div>
