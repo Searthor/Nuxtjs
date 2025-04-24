@@ -8,7 +8,7 @@
                     <i class="bi bi-house-door me-1"></i> Dashboard
                 </router-link>
             </div>
-           
+
             <!-- Table Section -->
             <div class="card shadow-sm">
                 <div class="card-body">
@@ -173,6 +173,7 @@
 
 <script setup>
 import axios from 'axios';
+const { $swal } = useNuxtApp()
 const isModalOpen = ref(false)
 const showDeleteModal = ref(false)
 const searchQuery = ref('')
@@ -201,9 +202,13 @@ const filteredRoles = computed(() => {
         item.name.toLowerCase().includes(query)
     );
 });
+
+
 function openModal() {
 
     isModalOpen.value = true
+
+
 }
 function closeModal() {
     isModalOpen.value = false
@@ -297,32 +302,70 @@ const submitForm = async () => {
         des: form.value.des,
         function_id: selectedItems.value
     };
-
     if (form.value.id) {
         // Update existing role
         const response = await axios.post("/api/roles/update", payload);
         if (response.status === 200) {
             await refresh();
             closeModal()
+            $swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: 'Update Rote successfully',
+                showConfirmButton: false,
+                position: "top-end",
+                toast: true,
+            })
         }
     } else {
         const response = await axios.post("/api/roles/create", payload);
         if (response.status === 200) {
             await refresh();
             closeModal()
+            $swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: 'Create Rote successfully',
+                showConfirmButton: false,
+                position: "top-end",
+                toast: true,
+            })
         }
     }
 }
-
 function confirmDelete(id) {
     roleToDelete.value = id
     showDeleteModal.value = true
 }
 
-function deleteRole() {
-    roles.value = roles.value.filter(role => role.id !== roleToDelete.value)
-    showDeleteModal.value = false
-    roleToDelete.value = null
+const deleteRole = async () => {
+
+    try {
+
+        const response = await $fetch(`/api/roles/${roleToDelete.value}/delete`, {
+            method: 'DELETE'
+        });
+
+        if (response.success) {
+            await $swal.fire(
+                'Deleted!',
+                'The role has been deleted.',
+                'success'
+            );
+            roles.value = roles.value.filter(role => role.id !== roleToDelete.value)
+            showDeleteModal.value = false
+            roleToDelete.value = null
+        }
+    } catch (error) {
+        $swal.fire(
+            'Error!',
+            error.data?.message || 'Failed to delete role',
+            'error'
+        );
+    }
+
+
+
 }
 
 
